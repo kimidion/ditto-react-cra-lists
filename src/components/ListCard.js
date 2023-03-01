@@ -2,14 +2,19 @@ import { useMutations, usePendingCursorOperation } from '@dittolive/react-ditto'
 import { useEffect, useState } from 'react'
 
 
-const ListCard = ({ collection }) => {
+const ListCard = ({ collectionId, collection, displayName }) => {
   const [text, setText] = useState('')
   const [completed, setCompleted] = useState(0)
+
   const { documents: tasks } = usePendingCursorOperation({
     collection,
+    query: "isDeleted == false"
   })
-  const { upsert, removeByID, updateByID } = useMutations({
-    collection,
+  const { upsert, updateByID } = useMutations({
+    collection
+  })
+  const { updateByID: updateList } = useMutations({
+    collection: "listNames",
   })
 
   useEffect(() => {
@@ -27,7 +32,7 @@ const ListCard = ({ collection }) => {
 
   const addTask = (e) => {
     e.preventDefault()
-    upsert({ value: { body: text, isCompleted: false } })
+    upsert({ value: { body: text, isCompleted: false, isDeleted: false } })
     setText('')
   }
 
@@ -42,11 +47,32 @@ const ListCard = ({ collection }) => {
         },
       })
 
-  const removeTask = (taskId) => () => removeByID({ _id: taskId })
+  const removeTask =
+    (taskId) => (e) =>
+      updateByID({
+        _id: taskId,
+        updateClosure: (mutableDoc) => {
+          if (mutableDoc) {
+            mutableDoc.at("isDeleted").set(!mutableDoc.value.isCompleted)
+          }
+        },
+      })
+
+  const saveDisplayName = (e) => {
+    const value = e.currentTarget.value
+    updateList({
+      _id: collectionId,
+      updateClosure: (mutableDoc) => {
+        if (mutableDoc) {
+          mutableDoc.at("displayName").set(value)
+        }
+      },
+    })
+  }
 
   return (
     <div className="border-slate-300 border p-4 rounded-2xl shadow-lg">
-        <h2 className="text-lg mb-2">{collection}</h2>
+        <h2 className="text-lg mb-2 p-1">{displayName || collection}</h2>
         <>
           {tasks.map((task) => (
             <div className="py-4 border-b flex" key={task.id.value}>
@@ -77,7 +103,7 @@ const ListCard = ({ collection }) => {
         }
         <form className="relative" onSubmit={addTask}>
           <input
-            className="block w-full rounded-lg border-0 py-2 pl-5 pr-12 text-lg text-slate-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="block w-full rounded-lg border py-2 pl-5 pr-12 text-lg text-slate-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             aria-label="Enter an item to add"
             placeholder="... do something great"
             value={text}
