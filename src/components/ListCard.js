@@ -46,7 +46,7 @@ const ListCard = ({ collection }) => {
 
   return (
     <div className="border-slate-300 border p-4 rounded-lg shadow-md">
-        <h2 className="text-lg">{collection}</h2>
+        <h2 className="text-lg mb-2">{collection}</h2>
         <>
           {tasks.map((task) => (
             <div className="py-4 border-b flex" key={task.id.value}>
@@ -70,9 +70,9 @@ const ListCard = ({ collection }) => {
             </div>
           ))}
         </>
-        {tasks.length &&
+        {tasks.length !== 0 &&
             <div className="text-xs text-slate-400 py-2">
-            [{completed} of {tasks.length} complete]
+              [{completed} of {tasks.length} complete]
             </div>
         }
         <form className="relative" onSubmit={addTask}>
