@@ -45,7 +45,7 @@ const ListCard = ({ collection }) => {
   const removeTask = (taskId) => () => removeByID({ _id: taskId })
 
   return (
-    <div className="border-slate-300 border p-4 rounded-lg shadow-md">
+    <div className="border-slate-300 border p-4 rounded-2xl shadow-lg">
         <h2 className="text-lg mb-2">{collection}</h2>
         <>
           {tasks.map((task) => (
@@ -77,7 +77,7 @@ const ListCard = ({ collection }) => {
         }
         <form className="relative" onSubmit={addTask}>
           <input
-            className="block w-full rounded-md border-0 py-2 pl-5 pr-12 text-lg text-slate-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="block w-full rounded-lg border-0 py-2 pl-5 pr-12 text-lg text-slate-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             aria-label="Enter an item to add"
             placeholder="... do something great"
             value={text}

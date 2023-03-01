@@ -21,10 +21,10 @@ const NewListCard = () => {
   }
 
   return (
-    <div className="border-slate-300 border p-4 rounded-lg shadow-md w-full md:max-w-[600px] m-4 align-top">
+    <div className="border-slate-300 border p-4 rounded-2xl shadow-lg w-full md:max-w-[600px]">
         <form className="relative" onSubmit={addList}>
           <input
-            className="block w-full rounded-md border-0 py-2 pl-5 pr-12 text-lg text-slate-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="block w-full rounded-lg border-0 py-2 pl-5 pr-12 text-lg text-slate-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             aria-label="Add a new List"
             placeholder="Add a new list"
             value={listTitle}
