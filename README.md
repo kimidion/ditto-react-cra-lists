@@ -1,3 +1,19 @@
+# Ditto + Create React App + TailwindCSS
+
+I started off with CRA and added Ditto as a backend based on a sample project in the Ditto repo. 
+
+I added the ability to dynamically add multiple lists. Styles are done with TailwindCSS with icons from Heroicons.
+
+This app is deployed with Vercel.
+
+# Running this app
+
+Clone this app and copy the .env.template. Add your Ditto AppID and Token from the [Ditto Portal](https://portal.ditto.live/) online playground.
+
+#### Note: Ditto requires NodesJs LTS so be sure to use nvm if needed to ensure you are running the correct node version
+
+### `npm install` followed by `npm start` should get your running
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
