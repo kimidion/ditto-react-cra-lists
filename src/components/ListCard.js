@@ -53,7 +53,7 @@ const ListCard = ({ collectionId, collection, displayName }) => {
         _id: taskId,
         updateClosure: (mutableDoc) => {
           if (mutableDoc) {
-            mutableDoc.at("isDeleted").set(!mutableDoc.value.isCompleted)
+            mutableDoc.at("isDeleted").set(true)
           }
         },
       })
