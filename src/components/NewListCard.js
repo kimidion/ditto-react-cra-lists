@@ -16,12 +16,12 @@ const NewListCard = () => {
     e.preventDefault()
     if (listTitle === "")
       return
-    upsert({ value: { title: listTitle } })
+    upsert({ value: { title: listTitle, displayName: listTitle, isDeleted: false } })
     setListTitle("")
   }
 
   return (
-    <div className="border-slate-300 border p-4 rounded-2xl shadow-lg w-full md:max-w-[600px]">
+    <div className="border-slate-300 bg-white border p-4 rounded-2xl shadow-lg w-full md:max-w-[600px]">
         <form className="relative" onSubmit={addList}>
           <input
             className="block w-full rounded-lg border py-2 pl-5 pr-12 text-lg text-slate-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"

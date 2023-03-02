@@ -6,7 +6,7 @@
     @apply box-border
 }
 html {
-    @apply h-full  min-h-screen
+    @apply h-full  min-h-screen bg-gray-100
 }
 body, #root {
     @apply h-full
