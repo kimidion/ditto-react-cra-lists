@@ -12,7 +12,7 @@ Clone this app and copy the .env.template. Add your Ditto AppID and Token from t
 
 #### Note: Ditto requires NodesJs LTS so be sure to use nvm if needed to ensure you are running the correct node version
 
-### `npm install` followed by `npm start` should get your running
+### `npm install` followed by `npm start` should get you running
 
 # Getting Started with Create React App
 
