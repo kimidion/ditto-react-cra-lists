@@ -16,7 +16,7 @@ const NewListCard = () => {
     e.preventDefault()
     if (listTitle === "")
       return
-    upsert({ value: { title: listTitle, displayName: listTitle, isDeleted: false } })
+    upsert({ value: { title: listTitle, isDeleted: false } })
     setListTitle("")
   }
 

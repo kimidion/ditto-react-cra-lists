@@ -44,7 +44,7 @@ const App = () => {
       <NewListCard />
       <div className="py-6 grid gap-5 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
         {lists.map((list) => (
-          <ListCard key={list.id.value} collectionId={list.id.value} collection={list.value.title} displayName={list.value.displayName} />
+          <ListCard key={list.id.value} collectionId={list.id.value} title={list.value.title} />
         )).reverse()}
       </div>
     </main>

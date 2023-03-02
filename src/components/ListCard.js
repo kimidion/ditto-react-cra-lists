@@ -1,16 +1,16 @@
 import { useMutations, usePendingCursorOperation } from '@dittolive/react-ditto'
 import { useEffect, useState } from 'react'
 
-const ListCard = ({ collectionId, collection, displayName }) => {
+const ListCard = ({ collectionId, title }) => {
   const [text, setText] = useState('')
   const [completed, setCompleted] = useState(0)
 
   const { documents: tasks } = usePendingCursorOperation({
-    collection,
+    collection: `list-${collectionId}`,
     query: "isDeleted == false"
   })
   const { upsert, updateByID } = useMutations({
-    collection
+    collection: `list-${collectionId}`
   })
   const { updateByID: updateList } = useMutations({
     collection: "listNames",
@@ -63,7 +63,7 @@ const ListCard = ({ collectionId, collection, displayName }) => {
       _id: collectionId,
       updateClosure: (mutableDoc) => {
         if (mutableDoc) {
-          mutableDoc.at("displayName").set(value)
+          mutableDoc.at("title").set(value)
         }
       },
     })
@@ -86,7 +86,7 @@ const ListCard = ({ collectionId, collection, displayName }) => {
           className="text-lg mb-2 p-1"
           contentEditable
           onBlur={saveDisplayName}
-          dangerouslySetInnerHTML={{__html: displayName || collection}}
+          dangerouslySetInnerHTML={{__html: title}}
         />
         <form className="relative" onSubmit={addTask}>
           <input
