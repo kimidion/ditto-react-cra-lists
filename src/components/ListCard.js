@@ -88,6 +88,10 @@ const ListCard = ({ collectionId, collection, displayName }) => {
     setCardDragging(() => false)
   }
 
+  const handleDragOver = (e) => {
+    e.preventDefault()
+  }
+
   const handleDrop = (e) => {
     e.preventDefault()
     softDeleteList()
@@ -151,6 +155,7 @@ const ListCard = ({ collectionId, collection, displayName }) => {
         }
       </div>
       <DeleteDropTarget
+        handleDragOver={handleDragOver}
         handleDrop={handleDrop}
         dragging={cardDragging}
       />

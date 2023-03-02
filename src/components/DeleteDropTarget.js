@@ -1,12 +1,11 @@
-// import { useMutations } from '@dittolive/react-ditto'
-// import { useState } from 'react'
 
 
-const DeleteDropTarget = ({ handleDrop, dragging }) => {
+const DeleteDropTarget = ({ handleDragOver, handleDrop, dragging }) => {
 
   return (
     <div
       className={`fixed left-1/2 -translate-x-1/2 bottom-20 rounded-full w-[20vw] h-[20vw] md:w-[15vw] md:h-[15vw] max-w-[100px] max-h-[100px] border-4 border-red-800 bg-gray-100 z-10 shadow-lg transition-all ${dragging ? "opacity-80 scale-100" : "opacity-0 pointer-events-none scale-0"}`}
+      onDragOver={handleDragOver}
       onDrop={handleDrop}
     >
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5/6 h-5/6 stroke-red-900 m-auto relative top-1.5">
