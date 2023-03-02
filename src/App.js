@@ -5,7 +5,8 @@ import NewListCard from './components/NewListCard'
 
 const App = () => {
   const { ditto, documents: lists } = usePendingCursorOperation({
-    collection: "listNames"
+    collection: "listNames",
+    query: "isDeleted == false"
   })
 
   useEffect(() => {
