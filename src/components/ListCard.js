@@ -1,11 +1,9 @@
 import { useMutations, usePendingCursorOperation } from '@dittolive/react-ditto'
 import { useEffect, useState } from 'react'
-import DeleteDropTarget from './DeleteDropTarget'
 
 const ListCard = ({ collectionId, collection, displayName }) => {
   const [text, setText] = useState('')
   const [completed, setCompleted] = useState(0)
-  const [cardDragging, setCardDragging] = useState(false)
 
   const { documents: tasks } = usePendingCursorOperation({
     collection,
@@ -81,30 +79,9 @@ const ListCard = ({ collectionId, collection, displayName }) => {
       },
     })
 
-  const handleCardDragStart = (e) => {
-    setCardDragging(() => true)
-  }
-  const handleCardDragEnd = (e) => {
-    setCardDragging(() => false)
-  }
-
-  const handleDragOver = (e) => {
-    e.preventDefault()
-  }
-
-  const handleDrop = (e) => {
-    e.preventDefault()
-    softDeleteList()
-  }
-
   return (
     <>
-      <div
-        className="border-slate-300 border p-4 rounded-2xl shadow-lg bg-white hover:scale-105 transition-all"
-        draggable
-        onDragStart={handleCardDragStart}
-        onDragEnd={handleCardDragEnd}
-      >
+      <div className="border-slate-300 border p-4 rounded-2xl shadow-lg bg-white hover:scale-105 transition-all">
         <h2
           className="text-lg mb-2 p-1"
           contentEditable
@@ -148,17 +125,21 @@ const ListCard = ({ collectionId, collection, displayName }) => {
             </div>
           ))}
         </>
-        {tasks.length !== 0 &&
-          <div className="text-xs text-slate-400 py-2">
-            [{completed} of {tasks.length} complete]
+        <div className="flex flex-row items-start justify-between py-2">
+          <div>
+            {tasks.length !== 0 &&
+              <button disabled className="text-sm md:text-xs text-slate-400 border-0 bg-transparent p-1">
+                {completed} of {tasks.length} complete
+              </button>
+            }
           </div>
-        }
+          <div>
+            <button onClick={softDeleteList} className="text-sm md:text-xs text-red-800 border-0 bg-transparent p-1" type="button">
+              Archive list 🥡
+            </button>
+          </div>
+        </div>
       </div>
-      <DeleteDropTarget
-        handleDragOver={handleDragOver}
-        handleDrop={handleDrop}
-        dragging={cardDragging}
-      />
     </>
   )
 }
