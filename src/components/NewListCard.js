@@ -2,8 +2,8 @@ import { useMutations } from '@dittolive/react-ditto'
 import { useState } from 'react'
 
 
-const NewListCard = () => {
-  const [listTitle, setListTitle] = useState('')
+const NewListCard = ({ disabled }) => {
+  const [listTitle, setListTitle] = useState("")
 
   const { upsert } = useMutations({
     collection: "listNames",
@@ -29,6 +29,7 @@ const NewListCard = () => {
             placeholder="Add a new list"
             value={listTitle}
             onChange={updateListTitle}
+            disabled={disabled}
             required
           />
           <button className="absolute top-1/2 -translate-y-1/2 right-3 rounded-full" type="submit" aria-label="add item">

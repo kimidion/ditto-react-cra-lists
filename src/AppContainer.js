@@ -17,19 +17,7 @@ const AppContainer = () => {
   return (
     <DittoProvider setup={createDittoInstance}>
       {({ loading, error }) => {
-        if (loading) {
-          return <div>Loading Ditto…</div>
-        }
-
-        if (error) {
-          return (
-            <div>
-              There was an error loading Ditto. Error: {error.toString()}
-            </div>
-          )
-        }
-
-        return <App />
+        return <App dittoLoading={loading} dittoError={error} />
       }}
     </DittoProvider>
   )

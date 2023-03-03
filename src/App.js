@@ -1,14 +1,25 @@
 import { usePendingCursorOperation } from '@dittolive/react-ditto'
-import { useEffect } from 'react'
-import { Analytics } from '@vercel/analytics/react';
+import { useEffect, useState } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import ListCard from './components/ListCard'
 import NewListCard from './components/NewListCard'
+import ListCardSkeleton from './components/ListCardSkeleton'
 
-const App = () => {
+const App = ({ dittoLoading, dittoError }) => {
+  const [listsLoading, setListsLoading] = useState(true)
   const { ditto, documents: lists } = usePendingCursorOperation({
     collection: "listNames",
     query: "isDeleted == false"
   })
+
+  useEffect(() => {
+    if (lists) {
+      // delaying this slightly bc the skeleton flash is almost too quick with a standard load speed
+      setTimeout(() => {
+        setListsLoading(false)
+      }, 600)
+    }
+  }, [lists])
 
   useEffect(() => {
     if (!ditto) {
@@ -43,12 +54,26 @@ const App = () => {
           ikimidion@gmail.com
         </a>
       </div>
-      <NewListCard />
+      <NewListCard disabled={dittoError} />
       <div className="py-6 grid gap-5 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 items-start">
-        {lists.map((list) => (
+        {/* show loading skeleton on load */}
+        {(dittoLoading || listsLoading) && (
+          <>
+            <ListCardSkeleton />
+            <ListCardSkeleton />
+            <ListCardSkeleton />
+          </>
+        )}
+        {/* show the list cards if not loading and no error */}
+        {!dittoError && !dittoLoading && !listsLoading && lists.map((list) => (
           <ListCard key={list.id.value} collectionId={list.id.value} title={list.value.title} />
         )).reverse()}
+        
       </div>
+      {/* show a static error state on a ditto load error */}
+      {dittoError && (
+        <div className="my-6 text-red-900 font-extrabold">There was an error loading Ditto. Error: {dittoError.toString()}</div>
+      )}
     </main>
     <Analytics />
     </>
