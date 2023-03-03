@@ -1,5 +1,6 @@
 import { usePendingCursorOperation } from '@dittolive/react-ditto'
 import { useEffect } from 'react'
+import { Analytics } from '@vercel/analytics/react';
 import ListCard from './components/ListCard'
 import NewListCard from './components/NewListCard'
 
@@ -18,6 +19,7 @@ const App = () => {
   }, [ditto])
 
    return (
+    <>
     <main className="min-h-full m-auto p-2 md:p-4">
       <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Dynamic Realtime Lists with Ditto</h1>
       <p className="text-base font-semibold leading-7 text-indigo-600 mb-2">by Kim Welch (open to work)</p>
@@ -48,6 +50,8 @@ const App = () => {
         )).reverse()}
       </div>
     </main>
+    <Analytics />
+    </>
   )
 }
 
