@@ -33,7 +33,7 @@ const App = ({ dittoLoading, dittoError }) => {
     <>
     <main className="min-h-full m-auto p-2 md:p-4">
       <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Dynamic Realtime Lists with Ditto</h1>
-      <p className="text-base font-semibold leading-7 text-indigo-600 mb-2">by Kim Welch (open to work)</p>
+      <p className="text-base font-semibold leading-7 text-indigo-600 mb-2">by Kim Welch</p>
       <div className="flex mb-4 gap-5">
         <a
           className="rounded-lg text-slate-900 font-semibold transition flex items-center gap-3 text-[0.8125rem] leading-6 py-1 px-1.5 hover:bg-slate-900/[0.03] -my-1 -mx-1.5" 
